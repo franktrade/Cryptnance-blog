@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\posts;
+use Facade\FlareClient\View;
+
+use Cviebrock\EloquentSluggable\SlugService;
 
 class postscontroller extends Controller
 {
@@ -13,7 +17,9 @@ class postscontroller extends Controller
      */
     public function index()
     {
-        //
+       
+     return view('blog.index')
+     ->with('post', posts::orderby('updated_at','DESC')->get());
     }
 
     /**
@@ -23,7 +29,7 @@ class postscontroller extends Controller
      */
     public function create()
     {
-        //
+       return View('blog.create');
     }
 
     /**
@@ -34,7 +40,18 @@ class postscontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+             'title'=>'required',
+             'description'=>'required',
+             'image'=>'required|mimes:jpg,png,jpeg|max:5048',
+        ]);
+
+        $newimagename = uniqid() . '-' . $request->title . '-' . $request->image->extension();
+          
+        $request->image->move(public_path('img'),   $newimagename);
+        $slug = SlugService::createSlug(post::class, 'slug', $request->title);
+
+        dd($slug);
     }
 
     /**

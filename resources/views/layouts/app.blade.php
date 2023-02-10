@@ -13,11 +13,11 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <!-- <link href="/css/app.css " rel="stylesheet"> -->
+    <!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
+
     <link rel="stylesheet" href="/css/web.css">
 
-</head>
+</head>   
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
     <div id="app">
         <header class="bg-gray-800 py-6">
@@ -29,7 +29,7 @@
                 </div>
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                 <a class="no-underline hover:underline" href="/">Home</a>
-                <a class="no-underline hover:underline" href="/">Blog</a>
+                <a class="no-underline hover:underline" href="/blog">Blog</a>
                 <a class="no-underline hover:underline" href="/">Crypto signal</a>
                 @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
